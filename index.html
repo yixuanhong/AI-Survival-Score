@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Survival Score</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="app.js"></script>
+    <script defer src="lang.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div class="max-w-3xl mx-auto py-10 px-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">AI Survival Score</h1>
+            <button onclick="toggleLang()" class="bg-blue-500 text-white px-4 py-1 rounded">EN/中文</button>
+        </div>
+        <p class="mb-4" id="subtitle">Wonder if AI is going to take your job? We built a tool that tells you how much of your job is automatable — and what you can do to stay irreplaceable.</p>
+
+        <label class="block mb-2 font-semibold" id="inputLabel">Enter your job title or upload a job description:</label>
+        <input type="text" id="jobTitle" class="border p-2 w-full mb-4" placeholder="e.g. UX Designer">
+        <input type="file" id="jdUpload" accept=".txt,.pdf" class="mb-4">
+        <button onclick="generateScore()" class="bg-green-500 text-white px-4 py-2 rounded">Generate Analysis</button>
+
+        <div id="result" class="mt-8 p-4 bg-white shadow rounded hidden">
+            <h2 class="text-xl font-bold mb-2">Result:</h2>
+            <div id="score"></div>
+            <div id="modules"></div>
+            <div id="tools"></div>
+            <div id="skills"></div>
+        </div>
+    </div>
+</body>
+</html>

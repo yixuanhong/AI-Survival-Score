@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>AI Survival Score</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="app.js"></script>
-    <script defer src="lang.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Survival Score</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-800">
-    <div class="max-w-3xl mx-auto py-10 px-6">
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold">AI Survival Score</h1>
-            <button onclick="toggleLang()" class="bg-blue-500 text-white px-4 py-1 rounded">EN/中文</button>
-        </div>
-        <p class="mb-4" id="subtitle">Wonder if AI is going to take your job? We built a tool that tells you how much of your job is automatable — and what you can do to stay irreplaceable.</p>
+<body>
+  <div class="container">
+    <h1>🧠 AI Survival Score</h1>
+    <p id="subtitle" class="subtitle">Enter your job title and let us analyze AI risk</p>
 
-        <label class="block mb-2 font-semibold" id="inputLabel">Enter your job title or upload a job description:</label>
-        <input type="text" id="jobTitle" class="border p-2 w-full mb-4" placeholder="e.g. UX Designer">
-        <input type="file" id="jdUpload" accept=".txt,.pdf" class="mb-4">
-        <button onclick="generateScore()" class="bg-green-500 text-white px-4 py-2 rounded">Generate Analysis</button>
+    <label id="inputLabel" for="inputText">Job Title:</label>
+    <textarea id="inputText" placeholder="e.g. Financial Analyst" rows="4"></textarea>
 
-        <div id="result" class="mt-8 p-4 bg-white shadow rounded hidden">
-            <h2 class="text-xl font-bold mb-2">Result:</h2>
-            <div id="score"></div>
-            <div id="modules"></div>
-            <div id="tools"></div>
-            <div id="skills"></div>
-        </div>
+    <div class="btn-group">
+      <button onclick="toggleLang()">🌐 切换语言 / Switch Language</button>
+      <button id="analyzeBtn">Analyze Now 🔍</button>
+      <button id="screenshotBtn">📸 Save Screenshot</button>
     </div>
+
+    <div id="resultCard" class="hidden">
+      <div id="resultText">Your result will appear here...</div>
+    </div>
+  </div>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="lang.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

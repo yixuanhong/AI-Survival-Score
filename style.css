@@ -1,0 +1,486 @@
+body {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  background-attachment: fixed; /* 确保背景固定 */
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 修复Safari的背景渐变问题 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(108, 99, 255, 0.13) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 107, 157, 0.13) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(78, 205, 196, 0.13) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none; /* 防止阻挡点击事件 */
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(120deg); }
+  66% { transform: translateY(10px) rotate(240deg); }
+}
+
+.container {
+  max-width: 900px;
+  margin: 60px auto;
+  background: rgba(255, 255, 255, 0.05);
+  /* 移除 backdrop-filter，改用普通背景色 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 50px;
+  border-radius: 32px;
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.05);
+  text-align: center;
+  position: relative;
+}
+
+/* 简化边框动画效果，移除 mask-composite */
+.container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 34px;
+  background: linear-gradient(45deg, #6c63ff, #ff6b9d, #4ecdc4, #6c63ff);
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite;
+  opacity: 0.3;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 48px;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #6c63ff, #ff6b9d, #4ecdc4);
+  /* Safari兼容的文字渐变 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* 添加fallback */
+  font-weight: 700;
+  animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from { filter: brightness(1); }
+  to { filter: brightness(1.2); }
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+textarea {
+  width: 100%;
+  max-width: 100%; /* 防止在小屏幕上溢出 */
+  box-sizing: border-box; /* 确保padding包含在width内 */
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  resize: vertical;
+  transition: all 0.3s ease;
+  /* 移除 backdrop-filter */
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #6c63ff;
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+button {
+  background: linear-gradient(135deg, #6c63ff, #7b8bff);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 16px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 16px rgba(108, 99, 255, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  /* 确保在移动设备上的触摸体验 */
+  -webkit-tap-highlight-color: transparent;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #5851db, #7366ff);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 24px rgba(108, 99, 255, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#resultCard {
+  background: rgba(255, 255, 255, 0.03);
+  /* 移除 backdrop-filter */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 35px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  line-height: 1.7;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#resultCard h2 {
+  font-size: 36px;
+  margin-bottom: 25px;
+  background: linear-gradient(135deg, #ff6b9d, #4ecdc4, #6c63ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* Safari fallback */
+  font-weight: 800;
+  animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.result-block {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  text-align: left;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #6c63ff, #ff6b9d, #4ecdc4);
+  border-radius: 0 2px 2px 0;
+}
+
+.result-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.result-block h3 {
+  margin-top: 0;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.result-block ul {
+  padding-left: 20px;
+}
+
+.result-block li {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+}
+
+.result-block li::marker {
+  color: #6c63ff;
+}
+
+.result-block p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+.result-block strong {
+  color: #4ecdc4;
+  font-weight: 600;
+}
+
+.result-block a {
+  color: #6c63ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(108, 99, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.result-block a:hover {
+  color: #7b8bff;
+  border-bottom-color: #7b8bff;
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 30px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart > div {
+  text-align: center;
+  position: relative;
+}
+
+.chart > div > div:first-child {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+/* 修复进度条样式 */
+.chart > div:last-child > div:nth-child(2) {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.chart > div:last-child > div:nth-child(2) > div:first-child {
+  background: linear-gradient(90deg, #6c63ff, #ff6b9d) !important;
+  height: 100% !important;
+  border-radius: 11px !important;
+  position: relative !important;
+  transition: width 0.3s ease !important;
+}
+
+.chart > div:last-child > div:nth-child(2) > div:last-child {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  color: #fff !important;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  z-index: 10 !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
+}
+
+#circleChart {
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
+}
+
+.hidden {
+  display: none;
+}
+
+.slogan-block {
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.15), rgba(255, 107, 157, 0.15));
+  border: 2px solid rgba(108, 99, 255, 0.3);
+  padding: 35px;
+  margin-top: 20px;
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 12px 24px rgba(108, 99, 255, 0.2);
+}
+
+.slogan-block h3 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #6c63ff, #ff6b9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* Safari fallback */
+  font-weight: 700;
+}
+
+.slogan-block p {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 响应式设计优化 */
+@media (max-width: 768px) {
+  body {
+    /* 移动设备上使用固定背景 */
+    background-attachment: scroll;
+  }
+  
+  .container {
+    margin: 20px;
+    padding: 30px 25px;
+    max-width: calc(100vw - 40px);
+  }
+  
+  h1 {
+    font-size: 36px;
+  }
+  
+  .chart {
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+  }
+  
+  .chart > div:last-child > div:nth-child(2) {
+    width: 180px !important;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  textarea {
+    font-size: 16px; /* 防止iOS自动缩放 */
+  }
+  
+  .slogan-block h3 {
+    font-size: 22px;
+  }
+  
+  .slogan-block p {
+    font-size: 18px;
+  }
+  
+  #resultCard h2 {
+    font-size: 28px;
+  }
+  
+  .result-block {
+    padding: 20px;
+  }
+}
+
+/* Safari特殊处理 */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+    /* Safari特定样式 */
+    .container {
+      background: rgba(30, 30, 60, 0.8);
+    }
+    
+    #resultCard {
+      background: rgba(30, 30, 60, 0.6);
+    }
+    
+    .result-block {
+      background: rgba(40, 40, 80, 0.7);
+    }
+  }
+}
+
+/* iOS设备优化 */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    background-attachment: scroll;
+  }
+  
+  button {
+    -webkit-appearance: none;
+  }
+  
+  textarea {
+    -webkit-appearance: none;
+  }
+}
+
+/* 确保所有设备上的基础颜色显示 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
